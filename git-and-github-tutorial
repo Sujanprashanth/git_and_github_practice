@@ -1,0 +1,1209 @@
+Let's take your actual **Student Management System project (Spring Boot + React)** and understand Git and GitHub commands through practical developer scenarios.
+
+I'll show you for every command:
+
+1. **Scenario** – When would you use it in a real project?
+2. **Sample input** – What command should you type?
+3. **Sample output** – What will Git display?
+4. **Explanation** – What happened behind the scenes?
+
+We'll use one imaginary project throughout:
+
+```
+student-management-system/
+│
+├── Backend/
+│   └── StudentController.java
+│
+├── frontend/
+│   └── src/App.jsx
+│
+├── README.md
+└── .gitignore
+```
+
+# **Part 1: Basic Git commands**
+
+## **1.&#x20;**`git --version`
+
+**Scenario:** You have installed Git on your computer. You want to confirm that it is installed correctly.
+
+Input:
+
+```
+git --version
+```
+
+Output:
+
+```
+git version 2.50.1.windows.1
+```
+
+Explanation:
+
+Git displays its installed version. If you get a version number, Git is available in your terminal.
+
+## **2.&#x20;**`git config`
+
+**Scenario:** You join a company. Whenever you save a commit, your name and email should appear as the author.
+
+Input:
+
+```
+git config --global user.name "Sujan Prashanth P S"
+git config --global user.email "your-email@example.com"
+```
+
+Check the configuration:
+
+```
+git config --list
+```
+
+Sample output:
+
+```
+user.name=Sujan Prashanth P S
+user.email=your-email@example.com
+```
+
+Explanation:
+
+- `--global` means the configuration applies to your Git repositories by default.
+- `user.name` identifies the author.
+- `user.email` identifies the author's email.
+
+## **3.&#x20;**`git init`
+
+**Scenario:** Your manager asks you to create a completely new project called Student Management System. You want Git to start tracking it.
+
+Input:
+
+```
+mkdir student-management-system
+cd student-management-system
+git init
+```
+
+Output:
+
+```
+Initialized empty Git repository
+```
+
+Explanation:
+
+Git creates a hidden `.git` directory. This directory stores the repository's history and other Git information.
+
+Important: Your existing Student Management System repository is already initialized. Don't run `git init` again unnecessarily in that project.
+
+## **4.&#x20;**`git status`
+
+**Scenario:** You create a new Java file and want to know whether Git is tracking it.
+
+Input:
+
+```
+git status
+```
+
+Output:
+
+```
+On branch main
+
+Untracked files:
+    StudentController.java
+
+nothing added to commit but untracked files present
+```
+
+Explanation:
+
+Git is saying:
+
+"I found StudentController.java, but you haven't asked me to track its changes yet."
+
+Remember: `git status` is like asking Git, "What is happening in my project right now?"
+
+## **5.&#x20;**`git add`
+
+**Scenario:** You have completed three files and want to prepare them for a commit.
+
+Input:
+
+```
+git add .
+```
+
+Output: Usually no output when successful.
+
+Now check:
+
+```
+git status
+```
+
+Output:
+
+```
+Changes to be committed:
+    new file: Backend/StudentController.java
+    new file: frontend/src/App.jsx
+    new file: README.md
+```
+
+Explanation:
+
+`git add .` stages all applicable changes under the current directory.
+
+You can also stage one specific file:
+
+```
+git add README.md
+```
+
+Think of staging as preparing your work for saving.
+
+## **6.&#x20;**`git commit`
+
+**Scenario:** You have finished creating the student controller and want to save this version in Git history.
+
+Input:
+
+```
+git commit -m "Add student controller"
+```
+
+Output:
+
+```
+[main a1b2c3d] Add student controller
+ 1 file changed, 25 insertions(+)
+ create mode 100644 Backend/StudentController.java
+```
+
+Explanation:
+
+- `commit` saves the staged changes in Git history.
+- `-m` allows you to provide a message.
+- `a1b2c3d` is an example of a shortened commit ID.
+
+A commit is a saved checkpoint of your project.
+
+## **7.&#x20;**`git log`
+
+**Scenario:** Your manager asks, "Who made the latest changes, and what did they change?"
+
+Input:
+
+```
+git log --oneline
+```
+
+Output:
+
+```
+a1b2c3d Add student controller
+d4e5f6g Create student entity
+h7i8j9k Initial project setup
+```
+
+Explanation:
+
+Git displays the commit history.
+
+- Latest commit appears first.
+- Every commit has a unique ID.
+- The message explains what was changed.
+
+## **8.&#x20;**`git show`
+
+**Scenario:** Your manager wants to inspect the exact changes made in a particular commit.
+
+Input:
+
+```
+git show a1b2c3d
+```
+
+Sample output:
+
+```
+commit a1b2c3d
+Author: Sujan Prashanth P S
+
+Add student controller
+
++ public class StudentController {
++     // Student API endpoints
++ }
+```
+
+Explanation:
+
+`git show` displays the details and changes introduced by a commit.
+
+# **Part 2: GitHub connection commands**
+
+## **9.&#x20;**`git remote add origin`
+
+**Scenario:** Your project is on your computer. Your manager creates an online GitHub repository and asks you to connect your local project to it.
+
+Input:
+
+```
+git remote add origin https://github.com/username/student-management-system.git
+```
+
+Output: No output if successful.
+
+Explanation:
+
+- `remote` means an online repository connection.
+- `add` means create a connection.
+- `origin` is the nickname for that connection.
+- The URL identifies the GitHub repository.
+
+## **10.&#x20;**`git remote -v`
+
+**Scenario:** You forgot which GitHub repository your project is connected to.
+
+Input:
+
+```
+git remote -v
+```
+
+Output:
+
+```
+origin  https://github.com/username/student-management-system.git (fetch)
+origin  https://github.com/username/student-management-system.git (push)
+```
+
+Explanation:
+
+It displays the remote repository URLs used for fetching and pushing.
+
+## **11.&#x20;**`git remote remove origin`
+
+**Scenario:** Your project is connected to the wrong GitHub repository. You want to remove that connection.
+
+Input:
+
+```
+git remote remove origin
+```
+
+Output: No output if successful.
+
+Explanation:
+
+This removes the local remote connection named `origin`.
+
+It does not delete the GitHub repository or your local project.
+
+## **12.&#x20;**`git clone`
+
+**Scenario:** A new teammate joins your company. They need a complete copy of your existing Student Management System.
+
+Input:
+
+```
+git clone https://github.com/username/student-management-system.git
+```
+
+Output:
+
+```
+Cloning into 'student-management-system'...
+remote: Enumerating objects...
+Receiving objects: 100% ...
+Resolving deltas: 100% ...
+```
+
+Explanation:
+
+Git downloads:
+
+- Project files.
+- Commit history.
+- Branch information.
+- Remote connection configuration.
+
+The teammate now has a local copy of the project.
+
+## **13.&#x20;**`git push`
+
+**Scenario:** You created a new Student API and committed it. Your manager wants it uploaded to GitHub.
+
+Input:
+
+```
+git push origin main
+```
+
+Output:
+
+```
+Enumerating objects: 5, done.
+Writing objects: 100% (5/5), done.
+To https://github.com/username/student-management-system.git
+   123abcd..456efgh  main -> main
+```
+
+Explanation:
+
+Git uploads your local commits to the remote `main` branch.
+
+Remember: `git commit` saves locally; `git push` sends those commits to GitHub.
+
+## **14.&#x20;**`git fetch`
+
+**Scenario:** Your teammate updated the README on GitHub. You want to check the remote updates without integrating them into your current branch.
+
+Input:
+
+```
+git fetch origin
+```
+
+Output:
+
+```
+From https://github.com/username/student-management-system
+   456efgh..789ijkl  main -> origin/main
+```
+
+Explanation:
+
+Git downloaded information about new remote commits and updated your remote-tracking branch.
+
+Your current local `main` branch has not automatically received those changes.
+
+## **15.&#x20;**`git pull`
+
+**Scenario:** You checked the remote updates and now want to bring the latest changes into your local main branch.
+
+Input:
+
+```
+git pull origin main
+```
+
+Output:
+
+```
+From https://github.com/username/student-management-system
+ * branch main -> FETCH_HEAD
+Updating 456efgh..789ijkl
+Fast-forward
+ README.md | 5 +++++
+```
+
+Explanation:
+
+Git fetches remote updates and integrates them into your current branch. Depending on the history and options, integration may use a merge or rebase.
+
+**Important difference:**
+
+| Command                | What happens?                           |
+| ---------------------- | --------------------------------------- |
+| `git fetch origin`     | Downloads remote updates only           |
+| `git pull origin main` | Downloads and integrates remote updates |
+
+# **Part 3: Branch commands**
+
+Imagine your manager gives you a new task:
+
+"Develop a login feature, but don't disturb the existing Student Management System."
+
+This is where branches become useful.
+
+## **16.&#x20;**`git branch`
+
+**Scenario:** You want to see which branches exist in your project.
+
+Input:
+
+```
+git branch
+```
+
+Output:
+
+```
+* main
+```
+
+Explanation:
+
+Your project currently has one local branch called `main`.
+
+The `*` means you are currently working on `main`.
+
+## **17.&#x20;**`git branch feature/login`
+
+**Scenario:** You want to create a separate branch for login development.
+
+Input:
+
+```
+git branch feature/login
+```
+
+Check:
+
+```
+git branch
+```
+
+Output:
+
+```
+  feature/login
+* main
+```
+
+Explanation:
+
+Git created `feature/login`, but you are still on `main`.
+
+Creating a branch does not automatically switch to it.
+
+## **18.&#x20;**`git switch`
+
+**Scenario:** You have created your login branch. Now you want to start working inside it.
+
+Input:
+
+```
+git switch feature/login
+```
+
+Output:
+
+```
+Switched to branch 'feature/login'
+```
+
+Check:
+
+```
+git branch
+```
+
+Output:
+
+```
+* feature/login
+  main
+```
+
+Explanation:
+
+You are now working on the login branch. Changes you make and commit here belong to this branch until they are integrated elsewhere.
+
+## **19.&#x20;**`git switch -c`
+
+**Scenario:** You don't want to create a branch and switch separately. You want to do both together.
+
+Input:
+
+```
+git switch -c feature/student-search
+```
+
+Output:
+
+```
+Switched to a new branch 'feature/student-search'
+```
+
+Explanation:
+
+- `-c` means create a new branch.
+- Git creates the branch and immediately switches to it.
+
+This is one of the most useful commands for everyday development.
+
+## **20.&#x20;**`git checkout`
+
+**Scenario:** Your project uses older Git instructions, and you need to switch to `main`.
+
+Input:
+
+```
+git checkout main
+```
+
+Output:
+
+```
+Switched to branch 'main'
+```
+
+You can also create and switch to a branch:
+
+```
+git checkout -b feature/dashboard
+```
+
+Output:
+
+```
+Switched to a new branch 'feature/dashboard'
+```
+
+Explanation:
+
+`git checkout` is an older command that can switch branches and perform other operations. For branch switching, modern Git recommends `git switch`.
+
+## **21.&#x20;**`git branch -a`
+
+**Scenario:** Your teammate created a branch on GitHub. You want to see both your local branches and remote-tracking branches.
+
+Input:
+
+```
+git branch -a
+```
+
+Output:
+
+```
+* main
+  feature/login
+  remotes/origin/main
+  remotes/origin/feature/payment
+```
+
+Explanation:
+
+- Local branches: `main`, `feature/login`.
+- Remote-tracking branches: `origin/main`, `origin/feature/payment`.
+
+This command helps you see branches known to your local repository, including remote-tracking branches.
+
+## **22.&#x20;**`git merge`
+
+**Scenario:** You finished the login feature. Your manager wants it included in the main project.
+
+First, switch to the destination branch:
+
+```
+git switch main
+```
+
+Then merge the login branch:
+
+```
+git merge feature/login
+```
+
+Output example:
+
+```
+Updating 123abcd..456efgh
+Fast-forward
+ LoginController.java | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+```
+
+Explanation:
+
+Git combines the changes from `feature/login` into the branch you are currently on, which is `main`.
+
+Remember: the current branch is the destination of the merge.
+
+## **23.&#x20;**`git branch -d`
+
+**Scenario:** The login feature has been merged successfully. You no longer need its local branch.
+
+Input:
+
+```
+git branch -d feature/login
+```
+
+Output:
+
+```
+Deleted branch feature/login (was 456efgh).
+```
+
+Explanation:
+
+Git deletes the local branch reference. It does not remove the already-merged changes from `main`.
+
+# **Part 4: Commands to correct mistakes**
+
+Now imagine you are developing the Student Management System and accidentally modify some files.
+
+These commands help you inspect and correct your work.
+
+## **24.&#x20;**`git diff`
+
+**Scenario:** You modify `StudentController.java`. Before staging it, you want to know exactly what changed.
+
+Original code:
+
+```
+public String getStudent() {
+    return "Student Details";
+}
+```
+
+You change it to:
+
+```
+public String getStudent() {
+    return "Student Information";
+}
+```
+
+Input:
+
+```
+git diff
+```
+
+Sample output:
+
+```
+-    return "Student Details";
++    return "Student Information";
+```
+
+Explanation:
+
+- `-` indicates the previous line.
+- `+` indicates the new line.
+
+Git is showing you the difference between the working file and the index (staging area).
+
+## **25.&#x20;**`git restore filename`
+
+**Scenario:** You changed the wrong Java file. You have not staged it yet. You want to discard those changes and restore the last committed version.
+
+Input:
+
+```
+git restore StudentController.java
+```
+
+Output: No output if successful.
+
+Check:
+
+```
+git status
+```
+
+Output:
+
+```
+On branch main
+nothing to commit, working tree clean
+```
+
+Explanation:
+
+Git restores the file from the index, normally matching the last committed version if nothing else was staged.
+
+
+
+Warning
+
+&#x20;Your unstaged changes to that file are discarded. Don't use this if you want to keep them.
+
+
+
+## **26.&#x20;**`git restore --staged filename`
+
+**Scenario:** You modified `StudentController.java` and staged it, but now you decide it isn't ready for the next commit.
+
+Input:
+
+```
+git restore --staged StudentController.java
+```
+
+Check:
+
+```
+git status
+```
+
+Output:
+
+```
+Changes not staged for commit:
+    modified: StudentController.java
+```
+
+Explanation:
+
+The file is removed from staging, but your actual modifications remain in the working directory.
+
+Think of it as taking the file off the prepared-for-commit list without throwing away your work.
+
+## **27.&#x20;**`git rm filename`
+
+**Scenario:** Your manager says the old `OldStudentController.java` file is no longer needed.
+
+Input:
+
+```
+git rm OldStudentController.java
+```
+
+Output:
+
+```
+rm 'OldStudentController.java'
+```
+
+Check:
+
+```
+git status
+```
+
+Output:
+
+```
+Changes to be committed:
+    deleted: OldStudentController.java
+```
+
+Explanation:
+
+Git removes the file from the working directory and stages its deletion. You must commit this deletion to record it in history.
+
+## **28.&#x20;**`git revert commit-id`
+
+**Scenario:** You committed and pushed a wrong change. Your teammate has already downloaded the branch. You want to undo your mistake without rewriting shared history.
+
+First, inspect your history:
+
+```
+git log --oneline
+```
+
+Output:
+
+```
+456efgh Add wrong student validation
+123abcd Add student validation
+789ijkl Initial project setup
+```
+
+You want to reverse `456efgh`.
+
+Input:
+
+```
+git revert 456efgh
+```
+
+Output example:
+
+```
+[main 999mnop] Revert "Add wrong student validation"
+ 1 file changed, 2 deletions(-)
+```
+
+Explanation:
+
+Git creates a new commit that reverses the selected commit's changes.
+
+Your history now looks like this:
+
+```
+999mnop Revert "Add wrong student validation"
+456efgh Add wrong student validation
+123abcd Add student validation
+789ijkl Initial project setup
+```
+
+The original commit remains in history.
+
+This is generally the safer option when undoing a commit already shared with teammates.
+
+## **29.&#x20;**`git reset`
+
+**Scenario:** You made a commit locally, but you realize you want to move your branch back to the previous commit.
+
+Suppose the history is:
+
+```
+C3 Add login validation
+C2 Add login API
+C1 Initial project
+```
+
+You want to undo the latest local commit `C3`.
+
+### **Option A: Soft reset**
+
+Input:
+
+```
+git reset --soft HEAD~1
+```
+
+Result:
+
+```
+On branch main
+Changes to be committed:
+    modified: LoginController.java
+```
+
+Meaning: The commit is removed from the current branch history, but its changes remain staged.
+
+### **Option B: Mixed reset**
+
+Input:
+
+```
+git reset --mixed HEAD~1
+```
+
+Result:
+
+```
+On branch main
+Changes not staged for commit:
+    modified: LoginController.java
+```
+
+Meaning: The commit is removed from the current branch history, but its changes remain in your working directory, unstaged.
+
+### **Option C: Hard reset**
+
+Input:
+
+```
+git reset --hard HEAD~1
+```
+
+Output:
+
+```
+HEAD is now at 123abcd Add login API
+```
+
+Meaning: Git moves the branch back and resets the staging area and working files to that commit. Uncommitted changes can be permanently lost.
+
+Use with extreme care
+
+For now, remember:
+
+| Command   | What happens to changes from the removed commit? |
+| --------- | ------------------------------------------------ |
+| `--soft`  | Remain staged                                    |
+| `--mixed` | Remain unstaged                                  |
+| `--hard`  | Discarded from working tree and staging area     |
+
+Do not practise hard reset in your actual project.
+
+# **Part 5: Temporarily saving unfinished work**
+
+## **30.&#x20;**`git stash`
+
+**Scenario:** You are developing the student search feature. Suddenly, your manager asks you to fix a login bug immediately.
+
+You have modified:
+
+```
+StudentController.java
+StudentService.java
+```
+
+But your work is not ready to commit.
+
+You temporarily save your changes:
+
+Input:
+
+```
+git stash
+```
+
+Output:
+
+```
+Saved working directory and index state WIP on feature/student-search
+```
+
+Explanation:
+
+Git temporarily stores your tracked working changes and cleans your working directory so you can work on something else.
+
+Think of it as putting unfinished work into a temporary drawer.
+
+By default, untracked files are not included. To include them, use:
+
+```
+git stash -u
+```
+
+## **31.&#x20;**`git stash list`
+
+**Scenario:** You have saved several unfinished tasks. You want to see them.
+
+Input:
+
+```
+git stash list
+```
+
+Output:
+
+```
+stash@{0}: WIP on feature/student-search
+stash@{1}: WIP on feature/login
+```
+
+Explanation:
+
+Git displays your saved stash entries. The newest stash is normally at index `0`.
+
+## **32.&#x20;**`git stash pop`
+
+**Scenario:** You fixed the login bug. Now you want to continue your unfinished student search work.
+
+Input:
+
+```
+git stash pop
+```
+
+Output example:
+
+```
+On branch feature/student-search
+Changes not staged for commit:
+    modified: StudentController.java
+
+Dropped refs/stash@{0}
+```
+
+Explanation:
+
+Git restores the latest stash and removes that stash entry if the restoration succeeds.
+
+## **33.&#x20;**`git stash apply`
+
+**Scenario:** You want to restore your saved work, but you also want to keep a copy in the stash.
+
+Input:
+
+```
+git stash apply
+```
+
+Output example:
+
+```
+On branch feature/student-search
+Changes not staged for commit:
+    modified: StudentController.java
+```
+
+Explanation:
+
+The changes are restored, but the stash entry remains available.
+
+| Command           | Restores changes | Removes stash entry |
+| ----------------- | ---------------- | ------------------- |
+| `git stash pop`   | Yes              | Yes, if successful  |
+| `git stash apply` | Yes              | No                  |
+
+# **Part 6: Pull Request workflow on GitHub**
+
+This is particularly important when working in a company with other developers.
+
+Imagine your manager asks you to develop a new feature called Student Search.
+
+You complete the code on a separate branch. Now you need your teammate to review it before it enters `main`.
+
+## **34. Create a feature branch**
+
+Input:
+
+```
+git switch -c feature/student-search
+```
+
+Output:
+
+```
+Switched to a new branch 'feature/student-search'
+```
+
+## **35. Stage and commit your changes**
+
+Input:
+
+```
+git add .
+git commit -m "Add student search feature"
+```
+
+Output:
+
+```
+[feature/student-search 123abcd] Add student search feature
+ 2 files changed, 30 insertions(+)
+```
+
+## **36. Push the feature branch**
+
+Input:
+
+```
+git push -u origin feature/student-search
+```
+
+Output example:
+
+```
+To https://github.com/username/student-management-system.git
+ * [new branch] feature/student-search -> feature/student-search
+branch 'feature/student-search' set up to track 'origin/feature/student-search'.
+```
+
+Explanation:
+
+- `push`: uploads commits.
+- `-u`: sets upstream tracking.
+- `origin`: your GitHub remote.
+- `feature/student-search`: the branch being uploaded.
+
+## **37. Create a Pull Request**
+
+Now open your GitHub repository.
+
+[Forks and Pull Requests – Version Control with Git](https://images.openai.com/static-rsc-4/OUC3F1-bJkruCCTz3Nf2MacafVA4Y3AoUe5AjgAk3tWA01vOzXJ_9nHcV2nHPKhF-LcSDEMEjVKdep-uI9ghMQeJHH4vSWi8d63TzTh7Zqx_EgRWhuMFfwixtc66XJsx3Yuk_S1iSbmsTFSBThbgUyIQjStxYKY4wb8iptHiw48?purpose=inline)
+
+[Learn Git & GitHub: Best Practices for GitHub Repositories Cheatsheet | Codecademy](https://images.openai.com/static-rsc-4/6L3LprcXTbyN0kKSEV5unLPtH9R1oScav7kuMLo8Comw8WzuZSBHBDUHbTNjSo6i7F4mZP2tz68w_DIF2xeLXMj8blOeDpFLjrBMGANbQbysvwAlj1D2l8XgciCD3izYLRpgez54D1pPUZW7C3uP_NKaCvQCPEDmI4LOh8ip9-Y?purpose=inline)
+
+[10: Pull Requests (PRs) in GitHub — FLUXNET Open-Source Code Committee](https://images.openai.com/static-rsc-4/nYQ2eG-ib-KIg-qcQDbinhEhcOaQt833--OA3HoT5FkP-UauRWrj7P6rWtWD9heEwnOSX-W60EUkEmjj-kAXx-HEcWhptQHFIlmOiFC1ZTNbNxYam08HeUDwQXhVm4C86GxxMSWYYrMIn7My4bbyP9FpU7Vatg4P-DqVlmf7bfM?purpose=inline)
+
+Follow these steps:
+
+1. Open the repository on GitHub.
+2. Click **Pull requests**.
+3. Click **New pull request**.
+4. Select `main` as the Base branch.
+5. Select `feature/student-search` as the Compare branch.
+6. Click **Create pull request**.
+7. Add a title and description.
+8. Ask your teammate to review it.
+9. After approval, click **Merge pull request**.
+
+Explanation:
+
+A Pull Request is a request to review and merge your branch into another branch. Creating the PR does not automatically merge it.
+
+After merging, your feature is part of `main`.
+
+# **Part 7: How all these commands work together**
+
+Let's imagine you are assigned a new feature in your real Student Management System.
+
+Here is the complete development workflow:
+
+## **Your daily Git workflow**
+
+1. **Check your project**
+   ```
+   git status
+   ```
+2. **Get the latest main branch changes**
+   ```
+   git switch main
+   git pull origin main
+   ```
+3. **Create a feature branch**
+   ```
+   git switch -c feature/student-search
+   ```
+4. **Develop your feature**
+
+   Edit your Java and React files.
+5. **Check and prepare your changes**
+   ```
+   git status
+   git diff
+   git add .
+   ```
+6. **Save your work**
+   ```
+   git commit -m "Add student search feature"
+   ```
+7. **Upload your feature branch**
+   ```
+   git push -u origin feature/student-search
+   ```
+8. **Create a Pull Request**
+
+   GitHub → Pull requests → New pull request.
+9. **Review and merge**
+
+   Your teammate reviews and approves the code. Merge into `main`.
+10. **Update your local main branch**
+    ```
+    git switch main
+    git pull origin main
+    ```
+
+# **Part 8: Final command revision sheet**
+
+These are the commands and their meanings to remember.
+
+| Command                | Simple meaning                          |
+| ---------------------- | --------------------------------------- |
+| `git --version`        | Check Git installation                  |
+| `git config`           | Configure Git identity                  |
+| `git init`             | Start a repository                      |
+| `git status`           | Check project changes                   |
+| `git add`              | Stage changes                           |
+| `git commit`           | Save a checkpoint                       |
+| `git log`              | View commit history                     |
+| `git show`             | Inspect a commit                        |
+| `git remote -v`        | View remote URLs                        |
+| `git remote add`       | Connect GitHub                          |
+| `git remote remove`    | Remove remote connection                |
+| `git clone`            | Copy a repository                       |
+| `git push`             | Upload commits                          |
+| `git fetch`            | Download remote updates only            |
+| `git pull`             | Download and integrate updates          |
+| `git branch`           | View/create branches                    |
+| `git branch -a`        | View local and remote-tracking branches |
+| `git switch`           | Switch branches                         |
+| `git switch -c`        | Create and switch branches              |
+| `git checkout`         | Older branch/file command               |
+| `git merge`            | Combine branches                        |
+| `git branch -d`        | Delete a merged local branch            |
+| `git diff`             | View changes                            |
+| `git restore`          | Discard unstaged file changes           |
+| `git restore --staged` | Unstage a file                          |
+| `git rm`               | Remove and stage file deletion          |
+| `git revert`           | Undo a commit with a new commit         |
+| `git reset --soft`     | Move back, keep changes staged          |
+| `git reset --mixed`    | Move back, keep changes unstaged        |
+| `git reset --hard`     | Move back and discard working changes   |
+| `git stash`            | Temporarily save unfinished work        |
+| `git stash list`       | View saved stashes                      |
+| `git stash pop`        | Restore and remove a stash              |
+| `git stash apply`      | Restore but keep a stash                |
+
+**My recommendation:** Don't try to memorize all 35 commands in one day. Practise the everyday commands first, then learn the correction and recovery commands using a separate practice repository.
+
+You already have a real project to apply these concepts to.&#x20;
